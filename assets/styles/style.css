@@ -1,0 +1,56 @@
+:root {
+  --title-color: #808080;
+  --title-color-hover: #74dfd5;
+  --subtitle: #134077;
+  --label-color: #231f20;
+  --input-border: #2d224c;
+  --light-grey: #cccccc;
+  --link: #2d224c;
+  --blue: #0057ff;
+  --light: #ffffff;
+  --dark: #000000;
+}
+
+/* CSS RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "DM Sans", sans-serif;
+  background-image: url("../images/bg.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 1070px;
+}
+
+header {
+  box-shadow: 0 0 15px 0 var(--blue);
+  border-radius: 0.6rem;
+  background-color: var(--light);
+  position: sticky;
+  top: 0;
+  left: 0;
+}
+
+header div {
+  width: 100%;
+  background-color: var(--dark);
+  height: 1.5rem;
+}
+
+.logo {
+  margin: 1.5rem 2.6rem;
+}
+
+h1 {
+  font-size: 0.9rem;
+  color: var(--title-color);
+  padding-top: 7px;
+}
+
+h1:hover {
+  color: var(--title-color-hover);
+}
