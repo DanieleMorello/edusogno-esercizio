@@ -36,6 +36,47 @@
       <path d="M27.8165 11.5998L24.6555 12.764L32.2426 33.3628L35.4035 32.1986L27.8165 11.5998Z" fill="#2D224C"/>
     </svg>    
   </header>
+
+  <main>
+    <h2>Crea il tuo account</h2>
+
+    <div class="registration-container">
+      <form action="" method="post">
+        <div class="mt2">
+          <label for="name">Inserisci il nome</label>
+          <br>
+          <input type="text" name="name" id="name" placeholder="Mario" required>
+        </div>
+
+        <div class="mt1">
+          <label for="surname">Inserisci il cognome</label>
+          <br>
+          <input type="text" name="surname" id="surname" placeholder="Rossi" required>
+        </div>
+
+        <div class="mt1">
+          <label for="mail">Inserisci l' e-mail</label>
+          <br>
+          <input type="email" name="mail" id="mail" placeholder="name@example.com" required>
+        </div>
+
+        <div class="mt1">
+          <label for="password">Inserisci la password</label>
+          <br>
+          <input type="password" name="password" id="password" placeholder="Scrivila qui" required>
+          <i toggle="#password" class="eye-toggle fa fa-eye"></i>
+        </div>
+
+        <div class="mt3">
+          <input type="submit" value="Registrati">
+        </div>   
+
+        <div class="mt2 pb1 aligne-center">
+          <a href="login.php">Hai già un account?<span>Accedi</span></a>
+        </div> 
+      </form>
+    </div>
+  </main>
 </body>
 
 </html>

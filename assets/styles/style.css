@@ -54,3 +54,99 @@ h1 {
 h1:hover {
   color: var(--title-color-hover);
 }
+
+h2 {
+  text-align: center;
+  margin: 6.5rem auto 1.5rem;
+  color: var(--subtitle);
+}
+
+main > .registration-container {
+  width: 662px;
+  height: 635px;
+  margin: auto;
+  border: 1px solid;
+  border-radius: 19px;
+  background-color: var(--light);
+}
+
+.mt1 {
+  margin-top: 30px;
+}
+
+.mt2 {
+  margin-top: 60px;
+}
+
+.mt3 {
+  margin-top: 90px;
+}
+
+label {
+  font-size: 15px;
+  line-height: 12.94px;
+  text-align: left;
+  font-weight: 700;
+  color: var(--label-color);
+  padding-top: 104px;
+}
+
+label,
+input {
+  margin-left: 40px;
+}
+
+input {
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 1px solid var(--input-border);
+  width: 579px;
+  font-size: 20px;
+  line-height: 19.9px;
+}
+
+input::placeholder {
+  color: var(--light-grey);
+}
+
+i {
+  color: var(--blue);
+  margin-left: -35px;
+}
+
+input[type="submit"] {
+  background-color: var(--blue);
+  color: var(--light);
+  width: 577px;
+  height: 59px;
+  border-radius: 11px;
+  text-transform: uppercase;
+  font-size: 20px;
+  line-height: 19.9px;
+  cursor: pointer;
+}
+
+input[type="submit"]:hover {
+  text-decoration: underline;
+}
+
+.aligne-center {
+  text-align: center;
+}
+
+a {
+  color: var(--link);
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 12.94px;
+  text-decoration: none;
+}
+
+span {
+  color: var(--dark);
+  font-weight: 700;
+  font-size: 13px;
+  line-height: 12.94px;
+  text-decoration: underline;
+}
