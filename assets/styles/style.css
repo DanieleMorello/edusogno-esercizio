@@ -9,6 +9,7 @@
   --blue: #0057ff;
   --light: #ffffff;
   --dark: #000000;
+  --invalid-input: #ff0000;
 }
 
 /* CSS RESET */
@@ -64,6 +65,15 @@ h2 {
 main > .registration-container {
   width: 662px;
   height: 635px;
+  margin: auto;
+  border: 1px solid;
+  border-radius: 19px;
+  background-color: var(--light);
+}
+
+main > .login-container {
+  width: 662px;
+  height: 434px;
   margin: auto;
   border: 1px solid;
   border-radius: 19px;
