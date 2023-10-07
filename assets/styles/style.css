@@ -62,22 +62,27 @@ h2 {
   color: var(--subtitle);
 }
 
-main > .registration-container {
-  width: 662px;
-  height: 635px;
-  margin: auto;
-  border: 1px solid;
-  border-radius: 19px;
-  background-color: var(--light);
-}
-
-main > .login-container {
+main > .registration-container,
+main > .login-container,
+main > .forgot-password-container {
   width: 662px;
   height: 434px;
   margin: auto;
   border: 1px solid;
   border-radius: 19px;
   background-color: var(--light);
+}
+
+main > .registration-container {
+  height: 635px;
+}
+
+main > .login-container {
+  height: 434px;
+}
+
+main > .forgot-password-container {
+  margin-top: 175px;
 }
 
 .mt1 {
