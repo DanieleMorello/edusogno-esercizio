@@ -1,25 +1,81 @@
+<?php
+session_start();
+
+$dbhost = 'localhost';
+$dbuser = 'root';
+$dbpassword = 'root';
+$dbname = 'edusogno';
+
+//Open a connection to MySQL Server
+if(!$connection = mysqli_connect($dbhost, $dbuser, $dbpassword, $dbname)) {
+    die("failed to connect!");
+}
+
+function check_login($connection) 
+{
+    if(isset($_SESSION['nome'])) //if this value exist
+    {
+        $nome = $_SESSION['nome'];
+        $query = "select * from utenti where nome = '$nome' limit 1";
+        $result = mysqli_query($connection, $query);
+        if($result && mysqli_num_rows($result) > 0)
+        {
+            $user_data = mysqli_fetch_assoc($result);
+            return $user_data;
+        }
+    }
+    // Redirect to login views if the use is not logged in
+    header("Location: login.php");
+    die;
+}
+
+function get_events($connection)
+{
+    //save the email of the logged user into a variable to use it in the query below
+    $email = $_SESSION["email"];
+    $query = "select * from eventi where attendees like '%$email%' limit 5"; //%$email%
+    $result = mysqli_query($connection, $query);
+    if($result && mysqli_num_rows($result) > 0)
+    {
+        $events = [];
+        while($row = mysqli_fetch_assoc($result)){//save every row into the array
+            $events[] = $row;
+        }
+        return $events;
+    }
+    return 'Nessun evento trovato!';
+}
+
+$user_data = check_login($connection);
+$events = get_events($connection);
+?>
+
 <!DOCTYPE html>
 <html lang="it">
 
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Edusogno Registrazione</title>
-  <!-- GOOGLE FONT -->
-  <link href="https://fonts.googleapis.com/css2?family=Comforter&family=DM+Sans:ital,opsz,wght@0,9..40,100;0,9..40,200;0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;0,9..40,900;0,9..40,1000;1,9..40,100;1,9..40,200;1,9..40,300;1,9..40,400;1,9..40,500;1,9..40,600;1,9..40,700;1,9..40,800;1,9..40,900;1,9..40,1000&family=Manrope:wght@400;600&family=Noto+Sans:wght@400;600;700;800&family=Outfit:wght@400;700&family=Roboto+Condensed:wght@300&display=swap" rel="stylesheet">
-  <!-- CDN FONT-AWESOME -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-  <!-- STYLE CSS -->
-  <link rel="stylesheet" href="./assets/styles/style.css">
-  <!-- SCRIPT JS -->
-  <script src="./assets/js/script.js" defer></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edusogno Log-in</title>
+    <!-- GOOGLE FONT -->
+    <link href="https://fonts.googleapis.com/css2?family=Comforter&family=DM+Sans:ital,opsz,wght@0,9..40,100;0,9..40,200;0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;0,9..40,900;0,9..40,1000;1,9..40,100;1,9..40,200;1,9..40,300;1,9..40,400;1,9..40,500;1,9..40,600;1,9..40,700;1,9..40,800;1,9..40,900;1,9..40,1000&family=Manrope:wght@400;600&family=Noto+Sans:wght@400;600;700;800&family=Outfit:wght@400;700&family=Roboto+Condensed:wght@300&display=swap" rel="stylesheet">
+    <!-- CDN FONT-AWESOME -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <!-- STYLE CSS -->
+    <link rel="stylesheet" href="./assets/styles/style.css">
+    <!-- LOGIN CSS -->
+    <link rel="stylesheet" href="./assets/styles/login.css">
+    <!-- SCRIPT JS -->
+    <script src="./assets/js/script.js" defer></script>
 </head>
 
-<body>
-  <header>   
+<body class="login-signup index">
+
+  <header class="header-login">
+    
     <div>
-      <h1>Registrazione</h1>
+      <h1>Pagina personale</h1>
     </div>
     
     <svg width="123.14" height="52.27" viewBox="0 0 124 53" fill="none" xmlns="http://www.w3.org/2000/svg" class="logo">
@@ -34,49 +90,27 @@
       <path d="M25.5688 15.5234H18.4387V33.4488H25.5688V15.5234Z" fill="#2D224C"/>
       <path d="M18.3242 22.1327L13.4602 20.395L9.38032 31.8148L14.2443 33.5525L18.3242 22.1327Z" fill="#2D224C"/>
       <path d="M27.8165 11.5998L24.6555 12.764L32.2426 33.3628L35.4035 32.1986L27.8165 11.5998Z" fill="#2D224C"/>
-    </svg>    
+    </svg>
+    
   </header>
-
-  <main>
-    <h2>Crea il tuo account</h2>
-
-    <div class="registration-container">
-      <form action="register.php" method="POST">
-        <div class="mt2">
-          <label for="name">Inserisci il nome</label>
-          <br>
-          <input type="text" name="name" id="name" placeholder="Mario" required>
-        </div>
-
-        <div class="mt1">
-          <label for="surname">Inserisci il cognome</label>
-          <br>
-          <input type="text" name="surname" id="surname" placeholder="Rossi" required>
-        </div>
-
-        <div class="mt1">
-          <label for="email">Inserisci l' e-mail</label>
-          <br>
-          <input type="email" name="email" id="email" placeholder="name@example.com" required>
-        </div>
-
-        <div class="mt1">
-          <label for="password">Inserisci la password</label>
-          <br>
-          <input type="password" name="password" id="password" placeholder="Scrivila qui" required>
-          <i toggle="#password" class="eye-toggle fa fa-eye"></i>
-        </div>
-
-        <div class="mt3">
-          <input type="submit" value="Registrati">
-        </div>   
-
-        <div class="mt2 pb1 aligne-center">
-          <a href="login.php">Hai già un account?<span> Accedi</span></a>
-        </div> 
-      </form>
-    </div>
-  </main>
+  
+    <main>
+        <h3>Ciao <?php echo $user_data["nome"] . " " . $user_data["cognome"] ?>, ecco i tuoi eventi</h3>
+        <ul class="container">
+            <?php if (is_string($events)) : ?>
+                <li><?php echo $events ?></li>
+            <?php else : ?>
+                <?php foreach ($events as $event) : ?>
+                    <li class="events">
+                        <h4><?php echo $event["nome_evento"] ?></h4>
+                        <p><?php echo $event["data_evento"] ?></p>
+                        <input type="submit" value="JOIN">
+                    </li>
+                <?php endforeach; ?>
+            <?php endif; ?>
+        </ul>
+    </main>
+ 
 </body>
 
 </html>

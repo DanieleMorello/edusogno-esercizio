@@ -47,7 +47,7 @@
     <h2>Hai già un account?</h2>
 
     <div class="login-container">
-      <form action="" method="post">
+      <form action="signup.php" method="post">
         <div class="mt2">
           <label for="email">Inserisci l' e-mail</label>
           <br>
